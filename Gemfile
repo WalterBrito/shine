@@ -35,6 +35,8 @@ gem 'jbuilder', '~> 2.5'
 
 # Devise for login
 gem 'devise'
+# bower
+gem 'bower-rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
