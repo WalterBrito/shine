@@ -37,6 +37,8 @@ gem 'jbuilder', '~> 2.5'
 gem 'devise'
 # bower
 gem 'bower-rails'
+# Faker to create test data
+gem 'faker'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
