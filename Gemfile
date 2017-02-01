@@ -46,7 +46,9 @@ group :development, :test do
   gem "rspec-rails", '~> 3.0'
   # START_HIGHLIGHT
   gem 'poltergeist'
-  gem 'database_cleaner'# END_HIGHLIGHT
+  gem 'database_cleaner'
+  # END_HIGHLIGHT  
+  gem 'teaspoon-jasmine'
 end
 
 group :development do
