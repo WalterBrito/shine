@@ -8,9 +8,3 @@ describe "testing that rspec is configured" do
     expect(false).to eq(true)
   end
 end
-
-describe("Testing Jasmine", function() {
-  it("can run a test", function() {
-    expect(true).toBe(true);
-  });
-});

@@ -1,5 +1,10 @@
-var app = angular.module('customers',
-  ['ngRoute', 'templates']);
+var app = angular.module(
+  'customers',
+  [
+    'ngRoute',
+    'templates'
+  ]
+);
 
   app.config([
             "$routeProvider",
