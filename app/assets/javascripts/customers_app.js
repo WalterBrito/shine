@@ -9,22 +9,22 @@ var app = angular.module(
 app.config([
           "$routeProvider",
   function($routeProvider) {
-
-    // configure our routes here...
-
     $routeProvider.when("/", {
-      controller: "CustomerSearchController",
+       controller: "CustomerSearchController",
       templateUrl: "customer_search.html"
     }).when("/:id",{
        controller: "CustomerDetailController",
-       templateUrl: "customer_detail.html"
+      templateUrl: "customer_detail.html"
     });
   }
 ]);
 
 app.controller("CustomerSearchController", [
-          '$scope','$http', '$location',
-  function($scope , $http, $location) {
+          '$scope','$http','$location',
+  function($scope , $http , $location) {
+
+   // rest of controller....
+
 
     var page = 0;
 
@@ -36,15 +36,14 @@ app.controller("CustomerSearchController", [
       }
       $http.get("/customers.json",
                 { "params": { "keywords": searchTerm, "page": page } }
-      ).success(
-        function(data,status,headers,config) {
-          $scope.customers = data;
+      ).then(function(response) {
+          $scope.customers = response.data;
           $scope.loading = false;
-      }).error(
-        function(data,status,headers,config) {
+      },function(response) {
           $scope.loading = false;
-          alert("There was a problem: " + status);
-        });
+          alert("There was a problem: " + response.status);
+        }
+      );
     }
 
     $scope.previousPage = function() {
@@ -63,7 +62,6 @@ app.controller("CustomerSearchController", [
     }
   }
 ]);
-
 app.controller("CustomerDetailController", [
           "$scope","$http","$routeParams",
   function($scope , $http , $routeParams) {
