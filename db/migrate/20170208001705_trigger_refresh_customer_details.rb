@@ -1,5 +1,5 @@
 class TriggerRefreshCustomerDetails < ActiveRecord::Migration[5.0]
-  def change    
+  def change
   end
   def up
   end
@@ -44,4 +44,5 @@ class TriggerRefreshCustomerDetails < ActiveRecord::Migration[5.0]
       execute %{DROP TRIGGER refresh_customer_details ON #{table}}
     end
     execute %{DROP FUNCTION refresh_customer_details()}
+  end
 end

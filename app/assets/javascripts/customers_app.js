@@ -2,6 +2,7 @@ var app = angular.module(
   'customers',
   [
     'ngRoute',
+    'ngResource',
     'templates'
   ]
 );
@@ -63,10 +64,13 @@ app.controller("CustomerSearchController", [
   }
 ]);
 app.controller("CustomerDetailController", [
-          "$scope","$http","$routeParams",
-  function($scope , $http , $routeParams) {
+          "$scope","$routeParams","$resource",
+  function($scope , $routeParams , $resource) {
+    var customerId = $routeParams.id;
+    var Customer = $resource('/customers/:customerId.json')
 
-    // Make the Ajax call and set $scope.customer...
+    $scope.customer = Customer.get({ "customerId": customerId})
+    alert("Ajax Call Initiated!");
 
     var customerId = $routeParams.id;
     $scope.customer = {};
