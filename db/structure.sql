@@ -66,31 +66,6 @@ ALTER SEQUENCE addresses_id_seq OWNED BY addresses.id;
 
 
 --
--- Name: states; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE states (
-    id integer NOT NULL,
-    code character varying NOT NULL,
-    name character varying NOT NULL
-);
-
-
---
--- Name: addresses_with_states; Type: VIEW; Schema: public; Owner: -
---
-
-CREATE VIEW addresses_with_states AS
- SELECT addresses.id,
-    addresses.street,
-    addresses.city,
-    states.code AS state,
-    addresses.zipcode
-   FROM (addresses
-     JOIN states ON ((states.id = addresses.state_id)));
-
-
---
 -- Name: ar_internal_metadata; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -231,6 +206,17 @@ ALTER SEQUENCE customers_shipping_addresses_id_seq OWNED BY customers_shipping_a
 
 CREATE TABLE schema_migrations (
     version character varying NOT NULL
+);
+
+
+--
+-- Name: states; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE states (
+    id integer NOT NULL,
+    code character varying NOT NULL,
+    name character varying NOT NULL
 );
 
 
@@ -413,6 +399,27 @@ ALTER TABLE ONLY states
 
 ALTER TABLE ONLY users
     ADD CONSTRAINT users_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: customers_lower_email; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX customers_lower_email ON customers USING btree (lower((email)::text));
+
+
+--
+-- Name: customers_lower_first_name; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX customers_lower_first_name ON customers USING btree (lower((first_name)::text) varchar_pattern_ops);
+
+
+--
+-- Name: customers_lower_last_name; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX customers_lower_last_name ON customers USING btree (lower((last_name)::text) varchar_pattern_ops);
 
 
 --
